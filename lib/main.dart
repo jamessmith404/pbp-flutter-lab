@@ -1,7 +1,13 @@
+import 'package:counter_7/drawer.dart';
+import 'package:counter_7/models.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => BudgetModel(),
+    child: const MyApp(),
+    ));
 }
 
 class MyApp extends StatelessWidget {
@@ -80,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: const LabDrawer(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
