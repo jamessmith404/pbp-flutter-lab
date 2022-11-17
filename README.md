@@ -78,3 +78,35 @@ child: Column(
 8. Edit nama aplikasi di widget `MyApp` dengan mengganti atribut `title` widget `MaterialApp` dengan `Flutter Demo`
 
 9. Membuat repository ini dengan nama `flutter-pbp-lab`, kemudian lakukan `git init` dan `git remote` ke HTTPS repo ini. Kemudian lakukan `add-commit-push`.
+
+# Tugas 8: Flutter Form
+
+### Jelaskan perbedaan `Navigator.push` dan `Navigator.pushReplacement`
+`Navigator.push` dan `Navigator.pushReplacement` sama-sama menambahkan _route_ ke Navigator. Yang menjadi pembeda adalah `Navigator.push` _route_ yang ada di bawahnya akan tetap tersimpan di dalam `Stack`, sedangkan `Navigator.pushReplacement` akan membuang _route_ yang sebelumnya ditimpa.
+
+### Widget-widget yang dipakai
+1. `Form` : untuk menghimpun elemen-elemen pada halaman input budget.
+2. `Drawer` : sebagai bagian untuk navigasi antar halaman layaknya `Navbar` di Django, terdapat di bagian atas aplikasi (bisa di bawah, kiri, atau kanan juga tergantung pemosisiannya).
+3. `TextFormField`  : untuk menampilkan _textbox_ untuk menginput judul dan nominal budget.
+4. `DropdownButtonFormField`  : untuk menampilkan menu dropdown berisi tipe budget.
+5. `InputDecoration`  : untuk mengkustomisasi tampilan dari `TextFormField`, seperti menambahkan teks bantuan, label, ikon, serta border.
+6. `TextButton` : untuk menambahkan tombol submisi budget
+7. `Card` : untuk menampilkan informasi mengenai suatu budget dalam bentuk kotak kartu.
+
+### Jenis-jenis _event_ pada Flutter
+1. `onPressed`
+2. `onTap`
+3. `onSaved`
+4. `onChange`
+5. `onEnter`
+6. `onExit`
+7. `onHover`
+
+### Cara kerja `Navigator`
+`Navigator` bekerja sebagai manager untuk setiap _child_ yang ada layaknya Stack. Tujuannya adalah sebagai urutan logika dalam menampilkan halaman pada aplikasi. Yang disimpan pada `Navigator` adalah _routes_ pada app. Untuk berpindah dari satu halaman ke halaman lain, terdapat method `push` dan `pop`. `push` adalah untuk menambahkan _route_ baru pada Navigator serta pindah ke _route_ tersebut sedangkan `pop` adalah untuk melepas _route_ yang ada di paling atas Navigator dan kembali ke _route_ sebelumnya.
+
+### Implementasi Checklist
+1. Membuat model untuk budget dengan membuat file `models.dart`. Di sana saya membuat class baru bernama `Budget` yang berisi atribut dasar pada budget serta `BudgetModel` yang me-_extends_ `ChangeNotifier` untuk me-manage state dari `Budget` ketika akan ada penambahan pada data List.
+2. Membuat halaman penambahan form dengan membuat file `add.dart`. Di sana saya membuat class `AddBudget` untuk nanti dipanggil di `Drawer` serta `_AddBudgetState` untuk mengatur bagaimana ketika widget `AddBudget` ini dibuat. Saya menambahkan `Form` serta elemen-elemen yang dibutuhkan dalam pembuatan form seperti textbox, dropdown menu, dan button.
+3. Membuat halaman penampilan form di file `list.dart`. Di sana saya membuat class `BudgetList` untuk nanti dipanggil di `Drawer` serta `_BudgetListState` mengatur bagaimana ketika widget `BudgetList` ini dibuat. Saya menambahkan `ListView` untuk menampilkan setiap elemen pada List berisi data budget. Setiap elemen akan ditampilkan dalam widget `Card`.
+4. Membuat bar untuk navigasi antar halaman di file `drawer.dart`. Di sana saya membuat class `LabDrawer` serta `_LabDrawerState` untuk mengatur bagaimana ketika widget `LabDrawer` dibuat. Saya membuat `Drawer` yang berisi `ListTile` berisi nama-nama _route_ untuk berpindah-pindah halaman serta menambahkan event listener `onTap` untuk berpindah halaman.
