@@ -110,3 +110,31 @@ child: Column(
 2. Membuat halaman penambahan form dengan membuat file `add.dart`. Di sana saya membuat class `AddBudget` untuk nanti dipanggil di `Drawer` serta `_AddBudgetState` untuk mengatur bagaimana ketika widget `AddBudget` ini dibuat. Saya menambahkan `Form` serta elemen-elemen yang dibutuhkan dalam pembuatan form seperti textbox, dropdown menu, dan button.
 3. Membuat halaman penampilan form di file `list.dart`. Di sana saya membuat class `BudgetList` untuk nanti dipanggil di `Drawer` serta `_BudgetListState` mengatur bagaimana ketika widget `BudgetList` ini dibuat. Saya menambahkan `ListView` untuk menampilkan setiap elemen pada List berisi data budget. Setiap elemen akan ditampilkan dalam widget `Card`.
 4. Membuat bar untuk navigasi antar halaman di file `drawer.dart`. Di sana saya membuat class `LabDrawer` serta `_LabDrawerState` untuk mengatur bagaimana ketika widget `LabDrawer` dibuat. Saya membuat `Drawer` yang berisi `ListTile` berisi nama-nama _route_ untuk berpindah-pindah halaman serta menambahkan event listener `onTap` untuk berpindah halaman.
+
+# Tugas 9: Integrasi Web Service pada Flutter
+### Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu?
+Tentu saja kita bisa mengambil data JSON tanpa perlu membuat model terlebih dahulu. Akan tetapi, hal tersebut bukanlah _best practice_. Hal tersebut akan membuat penyimpanan data yang di-_fetch_ akan berantakan. Dengan pembuatan model, data JSON yang di-_fetch_ dan disimpan menjadi lebih rapi, bersih, dan terstruktur sehingga mudah untuk diolah.
+
+### Widget-widget yang digunakan
+1. `FutureBuilder`: sebagai widget yang dapat membangun dirinya sendiri sesuai dengan status yang pada future sebagai wujud komputasi asinkronus
+2. `LabDrawer` : sebagai bagian untuk navigasi antar halaman layaknya `Navbar` di Django, terdapat di bagian atas aplikasi (bisa di bawah, kiri, atau kanan juga tergantung pemosisiannya). Merupakan kustomisasi Drawer buatan sendiri.
+3. `ListView` : dengan method `builder()` untuk membuat _cards_ pada layar sesuai dengan banyak data yang di-_fetch_ sebelumnya.
+4. `DateFormat`: untuk me-format data tanggal agar ditampilkan dengan standar penulisan tanggal (saya menggunakan sistem penanggalan US).
+5. `InputDecoration`  : untuk mengkustomisasi tampilan dari `TextFormField`, seperti menambahkan teks bantuan, label, ikon, serta border.
+6. `ElevatedButton`: untuk menampilkan button untuk kembali ke page my watch list setelah masuk ke bagian detail.
+7. beberapa Widget lainnya dari lab dan tugas sebelumnya.
+
+### Mekanisme pengambilan data dari json hingga dapat ditampilkan pada Flutter.
+1. Diberikan alamat URI dari API endpoint untuk di-_parse_ agar dapat di-_fetch_.
+2. Data akan di-_fetch_ dari API endpoint dari Heroku (Lab 3)
+3. Data yang telah di-_fetch_ akan di-_decode_ menjadi JSON dengan format UTF-8.
+4. Dari model yang telah dibuat sebelumnya, data JSON akan diubah menjadi data dalam bentuk model agar mudah untuk diolah.
+5. Data yang sudah didapat akan ditampilkan secara langsung atau melewati beberapa operasi logika di aplikasi Flutter.
+
+### Implementasi Checklist Tugas 9
+1. Menambahkan _dependency_ `http` ke dalam projek Tugas Flutter ini.
+2. Membuat model `MyWatchlist` sesuai dengan respons dari data yang diambil, yaitu atribut/fields yang sesuai dengan model yang dibuat pada Tugas 3.
+3. Membuat halaman `my_watchlist_page` untuk menampilkan setiap identitas film yang di-_fetch_ sebelumnya. Data-datanya akan ditampilkan dalam bentuk tumpukan _cards_ yang dapat di-_scroll_ dan dapat ditekan untuk mengakses halaman detail yaitu `my_watchlist_detail`. Kemudian mengaturan tampilan dan route nya.
+4. Membuat halaman `my_watchlist_detail` yang menampilkan setiap detail dari objek `MyWatchlist` yaitu setiap atribut yang dimilikinya. Dapat diakses dengan menekan salah satu _card_ pada halaman `my_watchlist_page`. Kemudian mengatur tampilan dan route nya.
+5. Membuat button `back` dengan menggunakan `ElevatedButton` di halaman `my_watchlist_detail` agar pengguna dapat kembali ke halaman sebelumnya.
+6. Melakukan _refactoring files_ yang ada sebelumnya dari Tugas 6 dan 7.
