@@ -1,10 +1,7 @@
 import 'package:counter_7/page/drawer.dart';
 import 'package:counter_7/page/my_watchlist_details.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:counter_7/model/my_watchlist.dart';
-import 'package:counter_7/main.dart';
+import 'package:counter_7/utils/fetch_data.dart';
 
 
 class MyWatchlistPage extends StatefulWidget {
@@ -15,35 +12,11 @@ class MyWatchlistPage extends StatefulWidget {
 }
 
 class _MyWatchlistPageState extends State<MyWatchlistPage> {
-    Future<List<MyWatchlist>> fetchMyWatchlist() async {
-        var url = Uri.parse('https://james-pbp-tugas2.herokuapp.com/mywatchlist/json/');
-        var response = await http.get(
-        url,
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Content-Type": "application/json",
-        },
-        );
-
-        // melakukan decode response menjadi bentuk json
-        var data = jsonDecode(utf8.decode(response.bodyBytes));
-
-        // melakukan konversi data json menjadi object ToDo
-        List<MyWatchlist> listMyWatchlist = [];
-        for (var d in data) {
-        if (d != null) {
-            listMyWatchlist.add(MyWatchlist.fromJson(d));
-        }
-        }
-
-        return listMyWatchlist;
-    }
-    
     @override
     Widget build(BuildContext context) {
       return Scaffold(
     appBar: AppBar(
-        title: const Text('To Do'),
+        title: const Text('My Watch List'),
     ),
     drawer: const LabDrawer(),
     body: FutureBuilder(
@@ -100,9 +73,9 @@ class _MyWatchlistPageState extends State<MyWatchlistPage> {
                     )
                 );
             }
-            }
+          }
         }
-    )
-);
-    }
+      )
+    );
+  }
 }

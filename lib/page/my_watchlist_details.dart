@@ -1,11 +1,9 @@
-
-import 'package:http/http.dart' as http;
 import 'package:counter_7/model/my_watchlist.dart';
 import 'package:flutter/material.dart';
-import 'package:counter_7/main.dart';
 import 'package:counter_7/page/drawer.dart';
 import 'package:counter_7/page/my_watchlist_page.dart';
-import 'dart:convert';
+import 'package:intl/intl.dart';
+
 
 class MyWatchlistRincianPage extends StatefulWidget {
   MyWatchlistRincianPage({Key? key, required this.movie})
@@ -54,7 +52,9 @@ class _MyWatchlistRincianPageState extends State<MyWatchlistRincianPage> {
                           "Released Date: ",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(movie.fields.releaseDate.toString())
+                        Text(
+                          DateFormat.yMMMMd('en_US').format(movie.fields.releaseDate),
+                        ),
                       ],
                     ),
                     Row(
@@ -63,7 +63,7 @@ class _MyWatchlistRincianPageState extends State<MyWatchlistRincianPage> {
                           "Rating: ",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Text(movie.fields.rating.toString())
+                        Text("${movie.fields.rating}/10")
                       ],
                     ),
                     Row(
